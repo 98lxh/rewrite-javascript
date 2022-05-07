@@ -113,22 +113,19 @@ export default class _Promise<T = any> {
   static rece(promises: _Promise[]) {
     return new _Promise((resolve, reject) => {
       promises.forEach(promise => {
-        const reasons: any[] = []
-        promise.then(resolve, (err) => {
-          reasons.push(err)
-          if (reasons.length === promises.length) {
-            //AggregateError(reasons)
-            reject(reasons)
-          }
-        })
+        promise.then(resolve, reject)
       })
     })
   }
 
   static any(promises: _Promise[]) {
     return new _Promise((resolve, reject) => {
+      const reasons: any[] = []
       promises.forEach(promise => {
-        promise.then(resolve, reject)
+        promise.then(resolve, err => {
+          reasons.push(err)
+          if (reasons.length === promises.length) reject(reasons)
+        })
       })
     })
   }

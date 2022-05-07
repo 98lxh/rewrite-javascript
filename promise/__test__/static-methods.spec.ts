@@ -93,38 +93,38 @@ describe("promise static methods", () => {
   })
 
 
-  // test("reac", (done) => {
-  //   //一个promise状态为error 则进入catch逻辑
-  //   const p1 = new _Promise(resolve => {
-  //     setTimeout(() => {
-  //       resolve(111)
-  //     }, 100)
-  //   })
-  //   const p2 = new _Promise(resolve => {
-  //     setTimeout(() => {
-  //       resolve(222)
-  //     }, 200)
-  //   })
-  //   const p3 = new _Promise(resolve => {
-  //     setTimeout(() => {
-  //       resolve(333)
-  //     }, 300)
-  //   })
-  //   const e1 = new _Promise((_, reject) => {
-  //     setTimeout(() => {
-  //       reject('err')
-  //     }, 50)
-  //   })
+  test("reac", (done) => {
+    //一个promise状态为error 则进入catch逻辑
+    const p1 = new _Promise(resolve => {
+      setTimeout(() => {
+        resolve(111)
+      }, 100)
+    })
+    const p2 = new _Promise(resolve => {
+      setTimeout(() => {
+        resolve(222)
+      }, 200)
+    })
+    const p3 = new _Promise(resolve => {
+      setTimeout(() => {
+        resolve(333)
+      }, 300)
+    })
+    const e1 = new _Promise((_, reject) => {
+      setTimeout(() => {
+        reject('err')
+      }, 50)
+    })
 
-  //   _Promise.rece([p1, p2, p3]).then(res => {
-  //     expect(res).toBe(111)
-  //   })
+    _Promise.rece([p1, p2, p3]).then(res => {
+      expect(res).toBe(111)
+    })
 
-  //   _Promise.rece([e1, p2, p3]).catch(err => {
-  //     expect(err).toBe('err')
-  //     done()
-  //   })
-  // })
+    _Promise.rece([e1, p2, p3]).catch(err => {
+      expect(err).toBe('err')
+      done()
+    })
+  })
 
   test("any", (done) => {
     //一个promise状态为error 则进入catch逻辑
@@ -156,8 +156,7 @@ describe("promise static methods", () => {
     })
 
     _Promise.any([e1, e2, e3]).catch(errs => {
-      console.log(errs)
-      // expect(errs).toStrictEqual(['err1', 'err2', 'err3'])
+      expect(errs).toStrictEqual(['err1', 'err2', 'err3'])
       done()
     })
   })
